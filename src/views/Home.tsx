@@ -1,7 +1,6 @@
 import useXLSX from "../hooks/useXLSX"
 import { WorkBook, utils, write } from 'xlsx'
 import FileSaver from 'file-saver'
-import { type } from "os"
 
 function Home() {
     const { handleExcelFileInput } = useXLSX()
@@ -50,28 +49,31 @@ function Home() {
                     compareRow = 2
                     break
                 }
+                utils.sheet_add_aoa(sourceSheet,[['轉學']],{origin:`G${row}`})
                 compareRow++
             }
             row++
         }
         
         const data = write(source,{bookType:'xlsx',type:'file'})
-        console.log(typeof(data))
         FileSaver.saveAs(data)
     }
     return (
         <div className='text-white'>
             <header className="text-white">
+                <p className='text-slate-400 mb-5'>
+                    使用須知 : 輸出檔案時，請記得檔案名稱後面要加上 <span className="text-red-300">.xlsx</span> 的副檔名唷~!
+                </p>
                 <div>
-                    <label htmlFor="">來源檔案</label>
-                    <input type="file" onChange={handleSourceFile} />
+                    <label className="cursor-pointer hover:text-slate-500" htmlFor="source"> + 來源檔案</label>
+                    <input className="hidden" id='source' type="file" onChange={handleSourceFile} />
                 </div>
-                <div>
-                    <label htmlFor="">比對檔案</label>
-                    <input type="file" onChange={handleComparisonFile} />
+                <div >
+                    <label className="cursor-pointer hover:text-slate-500" htmlFor="compare"> + 比對檔案</label>
+                    <input className="hidden" id='compare' type="file" onChange={handleComparisonFile} />
                 </div>
             </header>
-            <button className="border-2 mt-1" onClick={output}>輸出excel</button>
+            <button className="w-[150px] h-[50px] border-2 my-5 ml-10 hover:bg-slate-600" onClick={output}>輸出excel</button>
         </div>
     )
 }
