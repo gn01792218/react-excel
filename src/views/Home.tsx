@@ -11,13 +11,13 @@ function Home() {
     const [comparison, setComparisonFile] = useState<WorkBook>()
     async function handleSourceFile(e: React.ChangeEvent<HTMLInputElement>) {
         const file = await handleExcelFileInput(e)
-        if(!file) return
+        if (!file) return
         setSourceFile(file)
         setSourceFileName(e.target.files![0].name)
     }
     async function handleComparisonFile(e: React.ChangeEvent<HTMLInputElement>) {
         const file = await handleExcelFileInput(e)
-        if(!file)return
+        if (!file) return
         setComparisonFile(file)
         setCompareFileName(e.target.files![0].name)
     }
@@ -60,11 +60,11 @@ function Home() {
                 }
                 row++
             }
-            const data = write(source, { bookType: 'xlsx', type: 'file' })
-            FileSaver.saveAs(data)
         }catch(e){
-            alert(e+'可能是來源檔案或比對檔案有誤，致使程式無法做運算')
+            return alert(e+'可能是比對檔案或來源檔案格式錯誤，致使程式無法比對，請確認上傳符合格式內容之excel檔案，詳情請洽國蓓妮')
         }
+        const data = write(source, { bookType: 'xlsx', type: 'file' })
+        FileSaver.saveAs(data)
     }
     return (
         <div className='text-white'>
