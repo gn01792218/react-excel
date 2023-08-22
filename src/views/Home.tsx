@@ -3,8 +3,7 @@ import { WorkBook, utils, write } from 'xlsx'
 import FileSaver from 'file-saver'
 
 function Home() {
-    const { handleExcelFileInput } = useXLSX()
-
+    const { handleExcelFileInput, getValidExcelTypeStr } = useXLSX()
     const [source, setSourceFile] = useState<WorkBook>()
     const [sourceFileName, setSourceFileName] = useState<string>()
     const [compareFileName, setCompareFileName] = useState<string>()
@@ -70,7 +69,7 @@ function Home() {
         <div className='text-white'>
             <header className="text-white">
                 <p className='text-slate-400 mb-5'>
-                    使用須知 : 輸出檔案時，請記得檔案名稱後面要加上 <span className="text-red-300">.xlsx</span> 的副檔名唷~!
+                    使用須知 : 輸出檔案時，請記得檔案名稱後面要加上 <span className="text-red-300">{getValidExcelTypeStr()}</span> 的副檔名唷~!
                 </p>
                 <div>
                     <label className="flex cursor-pointer hover:text-slate-500" htmlFor="source">
