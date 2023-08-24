@@ -21,16 +21,17 @@ function Home() {
         setCompareFileName(e.target.files![0].name)
     }
     function getClassNumber(className: string) {
-        if (className.includes('一')) return 1
-        else if (className.includes('二')) return 2
-        else if (className.includes('三')) return 3
-        else if (className.includes('四')) return 4
-        else if (className.includes('五')) return 5
-        else if (className.includes('六')) return 6
-        else if (className.includes('七')) return 7
-        else if (className.includes('八')) return 8
-        else if (className.includes('九')) return 9
-        else if (className.includes('十')) return 10
+        const classStr = className.substring(2)
+        if (classStr.includes('一')) return 1
+        else if (classStr.includes('二')) return 2
+        else if (classStr.includes('三')) return 3
+        else if (classStr.includes('四')) return 4
+        else if (classStr.includes('五')) return 5
+        else if (classStr.includes('六')) return 6
+        else if (classStr.includes('七')) return 7
+        else if (classStr.includes('八')) return 8
+        else if (classStr.includes('九')) return 9
+        else if (classStr.includes('十')) return 10
     }
     function output() {
         if (!source || !comparison) return alert('請上傳好檔案')
