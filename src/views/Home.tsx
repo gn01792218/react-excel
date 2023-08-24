@@ -1,6 +1,5 @@
 import useXLSX from "../hooks/useXLSX"
-import { WorkBook, utils, write } from 'xlsx'
-import FileSaver from 'file-saver'
+import { WorkBook, utils, writeFileXLSX } from 'xlsx'
 
 function Home() {
     const { handleExcelFileInput, getValidExcelTypeStr } = useXLSX()
@@ -33,7 +32,7 @@ function Home() {
         else if (classStr.includes('九')) return 9
         else if (classStr.includes('十')) return 10
     }
-    function output() {
+    async function output() {
         if (!source || !comparison) return alert('請上傳好檔案')
         const sourceSheetsName = source.SheetNames[0]
         const comparisonSheetsName = comparison.SheetNames[0]
@@ -63,8 +62,7 @@ function Home() {
         }catch(e){
             return alert(e+'可能是比對檔案或來源檔案格式錯誤，致使程式無法比對，請確認上傳符合格式內容之excel檔案，詳情請洽國蓓妮')
         }
-        const data = write(source, { bookType: 'xlsx', type: 'file' })
-        FileSaver.saveAs(data)
+        writeFileXLSX(source,'nurse_system.xlsx')  //下載檔案
     }
     return (
         <div className='text-white'>
