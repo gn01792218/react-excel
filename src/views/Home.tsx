@@ -65,21 +65,21 @@ function Home() {
         writeFileXLSX(source,'nurse_system.xlsx')  //下載檔案
     }
     return (
-        <div className='text-white'>
+        <div className='text-white text-left flex flex-col items-center p-5'>
             <header className="text-white">
                 <p className='text-slate-400 mb-5'>
                     使用須知 : 輸出檔案時，請記得檔案名稱後面要加上 <span className="text-red-300">{getValidExcelTypeStr()}</span> 的副檔名唷~!
                 </p>
                 <div>
-                    <label className="flex cursor-pointer hover:text-slate-500" htmlFor="source">
-                        <p className="mr-2">+ 來源檔案</p>
+                    <label className="flex items-center cursor-pointer hover:text-slate-500 mb-2" htmlFor="source">
+                        <p className="mr-2 p-2 border-2">+ SSHIS-舊班檔案</p>
                         <p className="text-slate-500">{sourceFileName}</p>
                     </label>
                     <input className="hidden" id='source' type="file" onChange={handleSourceFile} />
                 </div>
                 <div >
-                    <label className="flex cursor-pointer hover:text-slate-500" htmlFor="compare">
-                        <p className="mr-2">+ 比對檔案</p>
+                    <label className="flex items-center cursor-pointer hover:text-slate-500" htmlFor="compare">
+                        <p className="mr-2 p-2 border-2">+ 學務系統-新班檔案</p>
                         <p className="text-slate-500">{compareFileName}</p>
                     </label>
                     <input className="hidden" id='compare' type="file" onChange={handleComparisonFile} />
