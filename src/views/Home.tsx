@@ -42,11 +42,12 @@ function Home() {
         try{
             while (sourceSheet[`B${row}`]) {
                 const name = sourceSheet[`B${row}`].v
-                const set = sourceSheet[`F${row}`].v
+                const seatNumber = sourceSheet[`A${row}`].v
                 let compareRow = 2
                 while (comparisonSheet[`E${compareRow}`]) {
                     const compareName = comparisonSheet[`E${compareRow}`].v
-                    if (name === compareName) {
+                    const compareSeatNumber = comparisonSheet[`C${compareRow}`].v
+                    if (seatNumber === compareSeatNumber) {
                         const compareClassnumber = getClassNumber(comparisonSheet[`A${compareRow}`].v)
                         const compareSetNumber = comparisonSheet[`B${compareRow}`].v
                         utils.sheet_add_aoa(sourceSheet, [[compareSetNumber]], { origin: `H${row}` })
@@ -62,13 +63,13 @@ function Home() {
         }catch(e){
             return alert(e+'可能是比對檔案或來源檔案格式錯誤，致使程式無法比對，請確認上傳符合格式內容之excel檔案，詳情請洽國蓓妮')
         }
-        writeFileXLSX(source,'nurse_system.xlsx')  //下載檔案
+        writeFileXLSX(source,'nurse_system.xls')  //下載檔案
     }
     return (
         <div className='text-white text-left flex flex-col items-center p-5'>
             <header className="text-white">
                 <p className='text-slate-400 mb-5'>
-                    使用須知 : 輸出檔案時，請記得檔案名稱後面要加上 <span className="text-red-300">{getValidExcelTypeStr()}</span> 的副檔名唷~!
+                    使用須知 :請在SSHIS舊班excel檔案中的A欄增加 <span className="text-red-300">學號</span>欄位，才能順利比對
                 </p>
                 <div>
                     <label className="flex items-center cursor-pointer hover:text-slate-500 mb-2" htmlFor="source">
