@@ -40,14 +40,14 @@ function Home() {
         const comparisonSheet = comparison.Sheets[comparisonSheetsName]
         let row = 2
         try{
-            while (sourceSheet[`B${row}`]) {
+            while (sourceSheet[`A${row}`] || sourceSheet[`B${row}`]) {
                 const name = sourceSheet[`B${row}`].v
-                const seatNumber = sourceSheet[`A${row}`].v
+                const studentNumber =sourceSheet[`A${row}`].v
                 let compareRow = 2
                 while (comparisonSheet[`E${compareRow}`]) {
                     const compareName = comparisonSheet[`E${compareRow}`].v
-                    const compareSeatNumber = comparisonSheet[`C${compareRow}`].v
-                    if (seatNumber === compareSeatNumber) {
+                    const compareStudentNumber = comparisonSheet[`C${compareRow}`].v
+                    if (studentNumber === compareStudentNumber) {
                         const compareClassnumber = getClassNumber(comparisonSheet[`A${compareRow}`].v)
                         const compareSetNumber = comparisonSheet[`B${compareRow}`].v
                         utils.sheet_add_aoa(sourceSheet, [[compareSetNumber]], { origin: `H${row}` })
@@ -60,8 +60,13 @@ function Home() {
                 }
                 row++
             }
-        }catch(e){
-            return alert(e+'可能是比對檔案或來源檔案格式錯誤，致使程式無法比對，請確認上傳符合格式內容之excel檔案，詳情請洽國蓓妮')
+        }
+        catch(e){
+            return alert(e+`
+            來源檔案發生錯誤的行數:${row}，
+            可能是比對檔案或來源檔案格式錯誤，或資料有誤，
+            致使程式無法比對，
+            請確認上傳符合格式內容之excel檔案。`,)
         }
         writeFileXLSX(source,'nurse_system.xls')  //下載檔案
     }
