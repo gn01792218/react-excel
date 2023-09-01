@@ -55,7 +55,7 @@ function Home() {
                         compareRow = 2
                         break
                     }
-                    utils.sheet_add_aoa(sourceSheet, [['轉學']], { origin: `G${row}` })
+                    utils.sheet_add_aoa(sourceSheet, [['查無資料']], { origin: `G${row}` })
                     compareRow++
                 }
                 row++
